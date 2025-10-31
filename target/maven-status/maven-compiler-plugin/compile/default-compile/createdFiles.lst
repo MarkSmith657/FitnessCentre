@@ -4,4 +4,5 @@ entities/Members.class
 entities/Payments.class
 entities/MembershipPlan.class
 entities/SmithFitnessCentre.class
+com/guidemeoh/FitnessCentre/MembersService.class
 main/Test.class
