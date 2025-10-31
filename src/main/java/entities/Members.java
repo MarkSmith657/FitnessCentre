@@ -30,10 +30,10 @@ public class Members {
 	private String address;
 	private String fitnessGoals;
 	
-	@ManyToOne// many members can have one plan and we define this in the member class as it makes more sense to have it here then in the membershiplan class
+	@ManyToOne(fetch = FetchType.EAGER)// many members can have one plan and we define this in the member class as it makes more sense to have it here then in the membershiplan class
 	// want to make sure its only unidirectional 
 	private MembershipPlan membershipPlan;
-	
+	// changed both fetch types to Eager in order to load membership plans and payments fully 
 	@OneToMany(fetch = FetchType.EAGER) // make sense for members to have payments and let hibernate manage the join tables 
     private List<Payments> payments = new ArrayList<>();
 	

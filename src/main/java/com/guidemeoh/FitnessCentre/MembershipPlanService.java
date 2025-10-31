@@ -69,6 +69,6 @@ public class MembershipPlanService {
           
         }
         dao.remove(member);
-        return "Member deleted successfully.";
+        return "Membership Plan deleted successfully.";
     }
 }

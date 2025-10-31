@@ -2,6 +2,7 @@ com/guidemeoh/FitnessCentre/MembershipPlanService.class
 com/guidemeoh/FitnessCentre/MyResource.class
 dao/GenericDAO.class
 entities/Members.class
+com/guidemeoh/FitnessCentre/PaymentsService.class
 entities/Payments.class
 entities/MembershipPlan.class
 entities/SmithFitnessCentre.class
