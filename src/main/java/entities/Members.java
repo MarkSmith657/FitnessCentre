@@ -4,6 +4,7 @@ package entities;
 //https://github.com/MarkSmith657/CommunityFitnessCentre
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,11 +30,11 @@ public class Members {
 	private String address;
 	private String fitnessGoals;
 	
-	@ManyToOne // many members can have one plan and we define this in the member class as it makes more sense to have it here then in the membershiplan class
+	@ManyToOne// many members can have one plan and we define this in the member class as it makes more sense to have it here then in the membershiplan class
 	// want to make sure its only unidirectional 
 	private MembershipPlan membershipPlan;
 	
-	@OneToMany // make sense for members to have payments and let hibernate manage the join tables 
+	@OneToMany(fetch = FetchType.EAGER) // make sense for members to have payments and let hibernate manage the join tables 
     private List<Payments> payments = new ArrayList<>();
 	
 	public Members() {}
