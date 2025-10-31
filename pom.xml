@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.guidemeoh</groupId>
+    <artifactId>FitnessCentre</artifactId> <!-- naming convention usec in maven project creation -->
+    <packaging>war</packaging>
+    <version>1.0.0</version>
+    <name>FitnessCentre Jersey Webapp</name>
+   <properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<maven.compiler.source>17</maven.compiler.source> <!-- tells maven to compile java code with JDK 17 -->
+<maven.compiler.target>17</maven.compiler.target>
+<jersey.version>2.41</jersey.version>
+<hibernate.version>5.6.15.Final</hibernate.version>
+</properties>
+<!-- each dependedncy says include this library and all its sub depedencies -->
+<dependencies>
+<!-- JAX-RS runtime jersey -->
+<dependency>
+<groupId>org.glassfish.jersey.containers</groupId>
+<artifactId>jersey-container-servlet</artifactId> <!-- core jersey container that integrates jaxrs with servlet container - apache -->
+<version>${jersey.version}</version>
+</dependency>
+<dependency>
+<groupId>org.glassfish.jersey.inject</groupId>
+<artifactId>jersey-hk2</artifactId> <!-- handles dependcy integration for jersey  -->
+<version>${jersey.version}</version>
+</dependency>
+<!-- JSON provider -->
+<dependency>
+<groupId>org.glassfish.jersey.media</groupId>
+<artifactId>jersey-media-json-jackson</artifactId> <!-- allows us to use @Produces and @Consumes to send/receive Json  -->
+<version>${jersey.version}</version>
+</dependency>
+
+<!-- JPA API + Hibernate -->
+<dependency>
+<groupId>javax.persistence</groupId>
+<artifactId>javax.persistence-api</artifactId> <!-- defines JPA standard  -->
+<version>2.2</version>
+</dependency>
+<dependency>
+<groupId>org.hibernate</groupId>
+<artifactId>hibernate-core</artifactId> <!-- actual JPA provider that implemetns persistence logic for the database -->
+<version>${hibernate.version}</version>
+</dependency>
+
+<!-- MySQL driver -->
+<dependency>
+<groupId>com.mysql</groupId>
+<artifactId>mysql-connector-j</artifactId> <!-- JDBC driver that connect HIbernate/JPA to your db  -->
+<version>8.0.31</version>
+</dependency>
+
+<!-- Servlet API provided by Tomcat -->
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>4.0.1</version>
+<scope>provided</scope>
+</dependency>
+</dependencies>
+
+<build>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-war-plugin</artifactId>
+<version>3.4.0</version>
+</plugin>
+</plugins>
+</build>
+</project>
