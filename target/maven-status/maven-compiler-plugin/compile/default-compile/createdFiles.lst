@@ -1,1 +1,7 @@
 com/guidemeoh/FitnessCentre/MyResource.class
+dao/GenericDAO.class
+entities/Members.class
+entities/Payments.class
+entities/MembershipPlan.class
+entities/SmithFitnessCentre.class
+main/Test.class
