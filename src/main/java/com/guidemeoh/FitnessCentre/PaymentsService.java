@@ -48,12 +48,12 @@ public class PaymentsService {
     @Produces("application/json")
     public Payments updateMembershiPlan(@PathParam("id") int id, Payments updated) {
     	Payments existing = dao.find(Payments.class, id); // look up existing record
-        if (existing == null) {
-       
-        }
-
-       existing.setPaymentAmount(updated.getPaymentAmount());
-       existing.setPaymentDate(updated.getPaymentDate());
+    	if (existing == null) return null;
+    	
+       // Update editable fields from members class
+       // Changes - made sure that if fields are returned null in json they keep already existing values rather than returning null/0
+       if(updated.getPaymentAmount() != 0.0) existing.setPaymentAmount(updated.getPaymentAmount());
+       if(updated.getPaymentDate() != null) existing.setPaymentDate(updated.getPaymentDate());
 
         dao.merge(existing);
         return existing; // returns payments as json

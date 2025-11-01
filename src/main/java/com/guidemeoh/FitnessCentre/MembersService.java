@@ -58,15 +58,14 @@ public class MembersService {
     @Produces("application/json")
     public Members updateMember(@PathParam("id") int id, Members updated) {
         Members existing = dao.find(Members.class, id); // look up existing record
-        if (existing == null) {
-       
-        }
+        if (existing == null) return null;
 
         // Update editable fields from members class
-        existing.setName(updated.getName());
-        existing.setPhone(updated.getPhoneNumber());
-        existing.setAddress(updated.getAddress());
-        existing.setFitnessGoal(updated.getFitnessGoals());
+        // Changes - made sure that if fields are returned null in json they keep already existing values rather than returning null/0
+        if(updated.getName() != null) existing.setName(updated.getName());
+        if(updated.getPhoneNumber() != 0) existing.setPhoneNumber(updated.getPhoneNumber());
+        if(updated.getAddress() !=null ) existing.setAddress(updated.getAddress());
+        if(updated.getFitnessGoals() != null )existing.setFitnessGoal(updated.getFitnessGoals());
 
         dao.merge(existing);
         return existing; // returns member as json

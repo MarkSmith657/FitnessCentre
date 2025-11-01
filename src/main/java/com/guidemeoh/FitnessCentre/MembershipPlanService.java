@@ -49,12 +49,12 @@ public class MembershipPlanService {
     @Produces("application/json")
     public MembershipPlan updateMembershiPlan(@PathParam("id") int id, MembershipPlan updated) {
     	MembershipPlan existing = dao.find(MembershipPlan.class, id); // look up existing record
-        if (existing == null) {
-       
-        }
-
-       existing.setDescription(updated.getDescription());
-       existing.setTotalCost(updated.getTotalCost());
+    	 if (existing == null) return null;
+    	 
+    	// Update editable fields from members class
+        // Changes - made sure that if fields are returned null in json they keep already existing values rather than returning null/0
+        if(updated.getDescription() != null )existing.setDescription(updated.getDescription());
+        if(updated.getTotalCost() != 0.0 )existing.setTotalCost(updated.getTotalCost());
 
         dao.merge(existing);
         return existing; // returns plan as json
