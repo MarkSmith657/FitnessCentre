@@ -1,5 +1,7 @@
 package entities;
 
+import javax.persistence.CascadeType;
+
 //COPY AND PASTED FROM PREVIOUS CA ATTEMPT COMMUNITYFITNESS CENTRE 
 //https://github.com/MarkSmith657/CommunityFitnessCentre
 
@@ -34,7 +36,8 @@ public class Members {
 	// want to make sure its only unidirectional 
 	private MembershipPlan membershipPlan;
 	// changed both fetch types to Eager in order to load membership plans and payments fully 
-	@OneToMany(fetch = FetchType.EAGER) // make sense for members to have payments and let hibernate manage the join tables 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true ) // make sense for members to have payments and let hibernate manage the join tables 
+	// added cascade to delete payments from members_payments table, also added oprhan removal = true so when a member ( parent ) is deleted all its payments ( children are to )
     private List<Payments> payments = new ArrayList<>();
 	
 	public Members() {}
