@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 
 import dao.GenericDAO;
 import entities.Members;
+import entities.MembershipPlan;
 import entities.Payments;
 
 @Path("smithfitnesscentre")
@@ -91,6 +92,41 @@ public class MembersService {
     	}
     	dao.remove(payment); // remove the payment from Payment 
     	return member; 
+    }
+    
+
+    @POST
+    @Path("/members/{id}/membershipplan")
+    @Consumes("application/json")
+    @Produces("application/json") // going to use members object here instead of membershipplan so i cann return the fully updated member instead of just a msp
+    public Members addMembershipToMember(@PathParam("id") int memberId, MembershipPlan plan) { // json input is connected to plan
+        Members member = dao.find(Members.class, memberId); //looks up member by id 
+        if (member == null) return null; // if no member is found return null
+        
+        MembershipPlan existingPlan = dao.find(MembershipPlan.class, plan.getId()); // retrieves membership plan from class and stores it in existing plan 
+        if (existingPlan == null ) return null;
+
+        member.setMembershipPlan(existingPlan); // links plan to member table and updates joined table 
+        dao.merge(member); // updates memeber to take in new values 
+
+        return member;
+    }
+    
+    
+    @DELETE
+    @Path("/members/{id}/membershipplan")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Members deleteMembershipPlan(@PathParam("id") int memberId) {
+    	Members member = dao.find(Members.class, memberId);//looks up member by id
+    	if (member == null ) return null; // if either member id is invalid return null 
+    	  
+    	MembershipPlan plan = member.getMembershipPlan(); // get current plan 
+    	if (plan != null )
+        member.setMembershipPlan(null);  // set the new plan to null                       
+        dao.merge(member);      // update member and return it                             
+
+        return member;  
     }
 
 
