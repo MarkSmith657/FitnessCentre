@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 
 import dao.GenericDAO;
 import entities.Members;
+import entities.Payments;
 
 @Path("smithfitnesscentre")
 public class MembersService {
@@ -51,6 +52,47 @@ public class MembersService {
         dao.persist(member);  // saves the new member entity
         return member;        // returns the saved member as confirmation
     }
+    
+    @POST
+    @Path("/members/{id}/payments")
+    @Consumes("application/json")
+    @Produces("application/json") // going to use members object here instead of payments so i cann return the fully updated member instead of just a payment
+    public Members addPaymentToMember(@PathParam("id") int memberId, Payments newPayment) { // json input is connected to newPayment
+        Members member = dao.find(Members.class, memberId); //looks up member by id 
+        if (member == null) return null; // if no member is found return null
+
+        dao.persist(newPayment); // save payment and add it to db
+        member.getPayments().add(newPayment); // links payment to member table and updates joined table 
+        dao.merge(member); // updates memeber to take in new values 
+
+        return member;
+    }
+    
+    @DELETE
+    @Path("/members/{memberId}/payments/{paymentId}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Members deleteMembersPayment(@PathParam("memberId") int memberId, @PathParam("paymentId") int paymentId) {
+    	Members member = dao.find(Members.class, memberId);//looks up member by id
+    	Payments payment = dao.find(Payments.class, paymentId); // looks up member by id
+    	if (member == null || payment == null ) return null; // if either member or payment id is invalid return null 
+    	
+    	Payments targetedPayment = null; // create a variable delete payment and set it = null 
+    	for (Payments p : member.getPayments()) { // for each payment (p) inside the list member.getPayments 
+    		if (p.getId() == paymentId) { // get the payment id associated to the payment 
+    			targetedPayment = p; // and delete the payment 
+    			break;
+    		}
+    	}
+    	
+    	if (targetedPayment !=null ) { // if payment isnt null 
+    		member.getPayments().remove(targetedPayment); // get the payment from the member payment list and remove the targeted payment 
+    		dao.merge(member); // update the member object 
+    	}
+    	dao.remove(payment); // remove the payment from Payment 
+    	return member; 
+    }
+
 
     @PUT
     @Path("/members/{id}")
@@ -77,10 +119,12 @@ public class MembersService {
     public String deleteMember(@PathParam("id") int id) {
         Members member = dao.find(Members.class, id);
         if (member == null) {
-          
+        	return "Member with ID " + id + " not found.";
         }
         dao.remove(member);
         return "Member deleted successfully.";
     }
+    
+    
 }
 

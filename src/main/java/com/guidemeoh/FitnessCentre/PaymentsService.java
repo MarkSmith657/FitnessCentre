@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import dao.GenericDAO;
+import entities.MembershipPlan;
 import entities.Payments;
 
 @Path("smithfitnesscentre")
@@ -29,24 +30,15 @@ public class PaymentsService {
     @GET
     @Path("/payments/{id}")
     @Produces("application/json")
-    public Payments getMemberById(@PathParam("id") int id) {
+    public Payments getPaymentsById(@PathParam("id") int id) {
         return dao.find(Payments.class, id);
     }
-
-    @POST
-    @Path("/payments")
-    @Consumes("application/json") // client sees in json 
-    @Produces("application/json") // server displays json to client 
-    public Payments addPayments(Payments payments) {
-        dao.persist(payments);  // saves the new payments entity
-        return payments;        // returns the saved plan as confirmation
-    }
-
+    
     @PUT
     @Path("/payments/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Payments updateMembershiPlan(@PathParam("id") int id, Payments updated) {
+    public Payments updatePayments(@PathParam("id") int id, Payments updated) {
     	Payments existing = dao.find(Payments.class, id); // look up existing record
     	if (existing == null) return null;
     	
@@ -58,8 +50,20 @@ public class PaymentsService {
         dao.merge(existing);
         return existing; // returns payments as json
     }
-
-    @DELETE
+    
+    
+    // DONT USE THESE ANYMORE - CHECK MEMBERSSERVICE FOR NEW METHODS 
+    
+   /* @POST
+    @Path("/payments")
+    @Consumes("application/json") // client sees in json 
+    @Produces("application/json") // server displays json to client  
+    public Payments addPayments(Payments payments) {
+        dao.persist(payments);  // saves the new payment entity
+        return payments;  // returns the saved payment as confirmation
+    } */
+    
+    /* @DELETE
     @Path("/payments/{id}")
     @Produces("application/json")
     public String deletePayments(@PathParam("id") int id) {
@@ -69,5 +73,5 @@ public class PaymentsService {
         }
         dao.remove(member);
         return "Payment deleted successfully.";
-    }
+    } */
 }
