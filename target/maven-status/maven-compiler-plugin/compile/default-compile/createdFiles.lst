@@ -1,4 +1,5 @@
 com/guidemeoh/FitnessCentre/MembershipPlanService.class
+com/guidemeoh/FitnessCentre/SmithFitnessCentreService.class
 com/guidemeoh/FitnessCentre/MyResource.class
 dao/GenericDAO.class
 entities/Members.class

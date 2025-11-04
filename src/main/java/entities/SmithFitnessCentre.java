@@ -21,7 +21,8 @@ public class SmithFitnessCentre {
 
     private String FitnessCentreName;
     
-    @OneToMany // a fitness centre can have many members but memebers doesnt need not reference it because hibernate will create joint table to link the two 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true) // a fitness centre can have many members but memebers doesnt need not reference it because hibernate will create joint table to link the two 
+    // changed fetch type to EAGER so that all members of the fitness centre are loaded immediately when the centre is retrieved preventing LazyInitializationException errors since the collection is accessed after the database session closes
     private List<Members> members = new ArrayList<>();
     
     public SmithFitnessCentre() {}

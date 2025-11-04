@@ -45,14 +45,18 @@ public class MembersService {
         return dao.find(Members.class, id);
     }
 
-    @POST
+   /* @POST
     @Path("/members")
     @Consumes("application/json") // client sees in json 
     @Produces("application/json") // server displays json to client 
     public Members addMember(Members member) {
+    	
+    	SmithFitnessCentre sfc = dao.find(SmithFitnessCentre.class, 1); // find the centre with id 1 and store it in sfc 
+    	
         dao.persist(member);  // saves the new member entity
+        sfc.getMembers().add(member); // get the members and link them to the sfc/member joint table
         return member;        // returns the saved member as confirmation
-    }
+    } */
     
     @POST
     @Path("/members/{id}/payments")
@@ -149,7 +153,7 @@ public class MembersService {
         return existing; // returns member as json
     }
 
-    @DELETE
+    /*@DELETE
     @Path("/members/{id}")
     @Produces("application/json")
     public String deleteMember(@PathParam("id") int id) {
@@ -159,7 +163,7 @@ public class MembersService {
         }
         dao.remove(member);
         return "Member deleted successfully.";
-    }
+    }*/
     
     
 }
