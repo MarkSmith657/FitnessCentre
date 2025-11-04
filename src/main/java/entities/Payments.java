@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity 
-@XmlRootElement(name = "payments")
+@XmlRootElement(name = "payments") // allows this class to be converted to XML
 public class Payments {
 	
 	@Id

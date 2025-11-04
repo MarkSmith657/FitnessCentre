@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity 
-@XmlRootElement(name = "members") //  is used in order to indicate a top-level class element
+@XmlRootElement(name = "members") //  allows this class to be converted to XML
 public class Members {
 	
 	@Id

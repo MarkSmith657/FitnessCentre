@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name = "membershipplan")
+@XmlRootElement(name = "membershipplan") // allows this class to be converted to XML
 public class MembershipPlan {
 	
 	@Id

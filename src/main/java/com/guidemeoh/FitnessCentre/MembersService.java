@@ -26,7 +26,7 @@ public class MembersService {
 
     @GET
     @Path("/hello")
-    @Produces("application/json")
+    @Produces("application/xml") // using xml 
     public String hello() {
         return "Welcome to the Community Fitness Centre REST API!";
     }

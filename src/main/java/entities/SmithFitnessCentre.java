@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@XmlRootElement(name = "smithfitnesscentre")
+@XmlRootElement(name = "smithfitnesscentre") // allows this class to be converted to XML
 @NamedQuery(name = "SmithFitnessCentre.findAll", query = "SELECT f FROM SmithFitnessCentre f")
 public class SmithFitnessCentre {
 	
