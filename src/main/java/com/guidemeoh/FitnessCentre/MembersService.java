@@ -82,7 +82,7 @@ public class MembersService {
     	Payments payment = dao.find(Payments.class, paymentId); // looks up member by id
     	if (member == null || payment == null ) return null; // if either member or payment id is invalid return null 
     	
-    	Payments targetedPayment = null; // create a variable delete payment and set it = null 
+    	Payments targetedPayment = null; // create a variable targeted payment and set it = null 
     	for (Payments p : member.getPayments()) { // for each payment (p) inside the list member.getPayments 
     		if (p.getId() == paymentId) { // get the payment id associated to the payment 
     			targetedPayment = p; // and delete the payment 

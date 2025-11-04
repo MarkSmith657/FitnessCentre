@@ -25,12 +25,12 @@ public class SmithFitnessCentreService {
 	    public SmithFitnessCentre addMember(Members member) {
 	    	
 	    	SmithFitnessCentre sfc = dao.find(SmithFitnessCentre.class, 1);
-	    	if (sfc == null) return null;// find the centre with id 1 and store it in sfc 
+	    	if (sfc == null) return null;// find the centre with id 1 and store it in sfc if none exist returnn null
 	    	
-	    	SmithFitnessCentre managedCentre = dao.merge(sfc);
+	    	SmithFitnessCentre managedCentre = dao.merge(sfc); // reattach sfc to managed state
 	    	
-	    	managedCentre.getMembers().add(member);
-	        dao.merge(managedCentre);
+	    	managedCentre.getMembers().add(member); // add the new member to the centre member list 
+	        dao.merge(managedCentre); // update centre so hibernate  saves the new link and mmeber to create join table 
 
 	        return managedCentre;
 	    }
@@ -44,9 +44,9 @@ public class SmithFitnessCentreService {
 	    	if (sfc == null ) return null;
 	    	// find the member inside the list and remove it
 	        Members toRemove = null;
-	        for (Members m : sfc.getMembers()) {
-	            if (m.getId() == memberId) {
-	                toRemove = m;
+	        for (Members m : sfc.getMembers()) { // for each member (m) inside the list sfc.getMembers
+	            if (m.getId() == memberId) { // get member by id 
+	                toRemove = m; // delete the member 
 	                break;
 	            }
 	        }
