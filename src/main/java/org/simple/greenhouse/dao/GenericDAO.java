@@ -1,5 +1,11 @@
 package org.simple.greenhouse.dao;
 
+
+// NOT USED ANYMORE - just using two seperate daos as no real need for generic when using quarkus
+
+
+
+
  // CDI scope annotation from Quarkus and marks this class as a bean
  // whose single instance will live for the whole application
 import jakarta.enterprise.context.ApplicationScoped;
