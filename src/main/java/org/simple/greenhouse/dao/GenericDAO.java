@@ -22,7 +22,7 @@ import java.util.List;
 @ApplicationScoped
 public class GenericDAO {
 	
-	@Inject // injects em and creates reference 
+	@Inject // injects em and creates reference em
 	EntityManager em;
 	
 	public GenericDAO() {}
