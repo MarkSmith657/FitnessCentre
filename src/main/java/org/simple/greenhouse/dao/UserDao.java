@@ -18,6 +18,7 @@ public class UserDao {
     @Transactional
     public void save(Users Users) {
         // persist a new Users into the database
+    	// if wanted to use generic - GenericDAO.persist(Users) and same for rest of fields 
         em.persist(Users);
     }
 
@@ -63,5 +64,10 @@ public class UserDao {
         List<Users> results = query.getResultList();
         return results.isEmpty() ? null : results.get(0);
     }
+
+	public Users findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

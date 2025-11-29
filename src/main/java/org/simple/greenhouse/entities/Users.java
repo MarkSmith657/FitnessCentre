@@ -21,7 +21,7 @@ public class Users { // entity class representing an application user
 
     private String username; 
 
-    private String passwordHash; // stores the hashed password
+    private String passwordHash; // stores the hashed password might use this later if have time to implement hash 
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)// one user can approve many emission records, load records when user is loaded and delete all associated records to user if user deleted 
     private List<EmissionRecord> approvedEmissions = new ArrayList<>();// list of emissions this user approved

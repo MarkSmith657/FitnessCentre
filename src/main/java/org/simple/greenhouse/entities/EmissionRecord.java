@@ -62,11 +62,11 @@ public class EmissionRecord {              // represents one emission row
         this.value = value;                 
     }
 
-    public String getUnit() {                
+    public String getGasUnit() {                
         return gasUnit;                         
     }
 
-    public void setUnit(String gasUnit) {       
+    public void setGasUnit(String gasUnit) {       
         this.gasUnit = gasUnit;                    
     }
 
@@ -97,10 +97,12 @@ public class EmissionRecord {              // represents one emission row
     public boolean isApproved() {            
         return approved;                     
     }
+    
 
     public void setApproved(boolean approved) { 
         this.approved = approved;            
     }
+
 
 }
 
