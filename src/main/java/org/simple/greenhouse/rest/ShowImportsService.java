@@ -7,6 +7,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
 import org.simple.greenhouse.service.EmissionXMLImportService;
+import org.simple.greenhouse.service.DescriptionsImportService;
 import org.simple.greenhouse.service.EmissionJsonImportService;
 
 @Path("/show/import")                      // base path for all import endpoints
@@ -18,6 +19,9 @@ public class ShowImportsService {
 
     @Inject
     EmissionJsonImportService jsonImportService; // service that reads the actual json file
+    
+    @Inject
+    DescriptionsImportService descriptionsImportService; // service for efdb descriptions
 
     @POST
     @Path("/xml")
@@ -62,5 +66,22 @@ public class ShowImportsService {
                     .build();
         }
     }
+    
+    @POST 
+    @Path("/descriptions/web") 
+    public Response importDescriptionsFromWeb() { // rest method that triggers my description import
+        try {
+            int updated = descriptionsImportService.importDescriptionsFromWeb(); // call my service to add descriptions and get count
+            String body = "{\"updated\":" + updated + ",\"source\":\"EFDB_WEB\"}";
+            return Response.ok(body).build(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("{\"error\":\"description import failed\"}") 
+                    .build(); 
+        }
+    }
+
 }
 

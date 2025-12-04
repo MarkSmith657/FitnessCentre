@@ -20,11 +20,12 @@ public class EmissionJsonImportService {
 
     @Inject
     EmissionRecordDao emissionDao;                  // dao used to save emissionrecord entities
+    
 
     @Transactional                                  // wrap whole import in one transaction
     public int importActualFromJson() throws Exception {
 
-        // load json file from classpath: src/main/resources/data/actual2023.json
+   
     	InputStream is = getClass().getResourceAsStream("/GreenhouseGasEmissions2025.json");
         if (is == null) {
             throw new IllegalStateException("GreenhouseGasEmissions2025.json not found on classpath");
@@ -71,6 +72,7 @@ public class EmissionJsonImportService {
             String category  = (String) item.get("Category");
             String gasUnits  = (String) item.get("Gas Units");
             Number valueNum  = (Number) item.get("Value");
+     
 
             // skip entries with no numeric value
             if (valueNum == null) {
