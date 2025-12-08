@@ -55,19 +55,15 @@ public class UserDao {
         }
     }
 
-    public Users findByUsersname(String Usersname) {
+    public Users findByUsername(String usersname) {
         // query to find a single Users by Usersname
         TypedQuery<Users> query = em.createQuery(
-                "SELECT u FROM Users u WHERE u.Usersname = :Usersname", Users.class
+                "SELECT u FROM Users u WHERE u.username = :username", Users.class
         );
-        query.setParameter("Usersname", Usersname);
+        query.setParameter("username", usersname);
         List<Users> results = query.getResultList();
         return results.isEmpty() ? null : results.get(0);
     }
 
-	public Users findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 

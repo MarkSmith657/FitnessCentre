@@ -72,8 +72,7 @@ public class EmissionService {
         existing.setCategoryCode(updated.getCategoryCode());
         existing.setCategoryDescription(updated.getCategoryDescription());
         existing.setSourceType(updated.getSourceType());
-        existing.setApproved(updated.isApproved());
-
+        existing.setApproved(updated.getApproved());
         emissionDao.update(existing);
         return Response.ok(existing).build();
     }
@@ -109,7 +108,7 @@ public class EmissionService {
         }
 
         // mark emission as approved 
-        record.setApproved(true);
+        record.setApproved("Approved");
         emissionDao.update(record); // update emission record 
 
         // link emission to user in one-to-many list

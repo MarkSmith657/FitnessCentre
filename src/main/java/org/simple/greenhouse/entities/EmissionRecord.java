@@ -22,7 +22,7 @@ public class EmissionRecord {              // represents one emission row
     private String categoryDescription;      // description from ipcc site
     private String sourceType;               // "predicted" or "actual"
 
-    private boolean approved;                // true if this record is approved
+    private String approved;                // sets approved if this record is approved
 
     // no reference to user here - unidirectional relationship from user only
 
@@ -94,12 +94,12 @@ public class EmissionRecord {              // represents one emission row
         this.sourceType = sourceType;        
     }
 
-    public boolean isApproved() {            
+    public String getApproved() {            
         return approved;                     
     }
     
 
-    public void setApproved(boolean approved) { 
+    public void setApproved(String approved) { 
         this.approved = approved;            
     }
 

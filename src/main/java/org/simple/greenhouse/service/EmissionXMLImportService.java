@@ -95,7 +95,7 @@ public class EmissionXMLImportService {
                 record.setGasUnit(gasUnits);                // e.g. "co2 (kt)"
                 record.setCategoryCode(category);           // ipcc category code from xml
                 record.setSourceType("PREDICTED");          // marks this as predicted data
-                record.setApproved(false);                  // newly imported data is not approved
+                record.setApproved("Not Approved");                  // newly imported data is not approved
 
                 // persist the entity using hibernate via my dao
                 emissionDao.save(record);

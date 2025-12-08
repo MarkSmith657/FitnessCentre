@@ -98,7 +98,7 @@ public class EmissionJsonImportService {
             record.setCategoryCode(category);
             // later you can plug in categorydescription from your ipcc mapping
             record.setSourceType("ACTUAL");                // mark these as actual readings
-            record.setApproved(false);                     // imported data starts unapproved
+            record.setApproved("Not Approved");                     // imported data starts unapproved
 
             // persist entity to mysql using hibernate via dao
             emissionDao.save(record);
